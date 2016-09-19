@@ -32,15 +32,4 @@ var levelData1 = [
 //|     $     | Gold chest
 //|     0     | Guard
 //|     &     | Player
-var tileInfo = {
-        "empty": ' ',
-        "brick": '#',
-        "block": '@',
-        "ladder": 'H',
-        "rope": '-',
-        "trap": 'X',
-        "hladder": 'S',
-        "gold": '$',
-        "guard1": '0',
-        "runner1": '&'
-};
+

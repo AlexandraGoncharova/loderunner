@@ -2,26 +2,18 @@
  * Created by alexa on 13.09.2016.
  */
 document.addEventListener("DOMContentLoaded", function(event) {
-    init();
+    onReady();
 });
 
-function init() {
-    var Container = PIXI.Container,
-        autoDetectRenderer = PIXI.autoDetectRenderer,
-        loader = PIXI.loader,
-        resources = PIXI.loader.resources,
-        TextureCache = PIXI.utils.TextureCache,
-        Texture = PIXI.Texture,
-        Sprite = PIXI.Sprite,
-        Text = PIXI.Text,
-        Graphics = PIXI.Graphics;
+function onReady() {
+    /*
 
 
+     var stage = new Container(),
+     renderer = autoDetectRenderer(960, 800);
+     document.body.appendChild(renderer.view);
 
-    var stage = new Container(),
-        renderer = autoDetectRenderer(960, 800);
-    document.body.appendChild(renderer.view);
-
+     */
 
     loader
         .add([
@@ -34,20 +26,27 @@ function init() {
             "assets/hladder.png",
             "assets/gold.png",
             "assets/guard1.png",
-            "assets/runner1.png"
+            "assets/runner1.png",
+            "assets/characters.json"
         ])
         .on("progress", loadProgressHandler)
-        .load(setup);
+        .load(init);
 
     function loadProgressHandler(loader, resource) {
         console.log("loading: " + resource.name);
         console.log("progress: " + loader.progress + "%");
     }
 
+}
 
-    var gameScene;
-    function setup() {
-        gameScene = new Container();
+var game, gameMode;
+
+function init() {
+    game = new GAME.LodeRunner();
+    gameMode = GAME_MODES.GAME_MODE;
+    document.body.appendChild(game.view.renderer.view);
+    game.initialize();
+        /*gameScene = new Container();
         stage.addChild(gameScene);
 
 
@@ -58,7 +57,7 @@ function init() {
         var _y = 0;
         for (var i = 0; i < data.length; i++)
         {
-            var key = Object.keys(tileInfo).filter(function(key) {return tileInfo[key] === data[i]})[0];
+            var key = Object.keys(LEVEL_TILES).filter(function(key) {return LEVEL_TILES[key] === data[i]})[0];
 
             if (key)
             {
@@ -80,10 +79,12 @@ function init() {
                 console.log("key not found "+ key);
             }
         }
-
+*/
         //Render the stage
-        renderer.render(stage);
+        //renderer.render(stage);
+}
 
-
-    }
+function update() {
+    requestAnimationFrame(update);
+    game.update();
 }
