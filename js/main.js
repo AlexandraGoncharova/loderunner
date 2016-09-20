@@ -46,42 +46,8 @@ function init() {
     gameMode = GAME_MODES.GAME_MODE;
     document.body.appendChild(game.view.renderer.view);
     game.initialize();
-        /*gameScene = new Container();
-        stage.addChild(gameScene);
-
-
-        var data = levelData1[0].split('');
-        //console.log(data);
-        var sprite;
-        var _x = 0;
-        var _y = 0;
-        for (var i = 0; i < data.length; i++)
-        {
-            var key = Object.keys(LEVEL_TILES).filter(function(key) {return LEVEL_TILES[key] === data[i]})[0];
-
-            if (key)
-            {
-                console.log(key);
-                sprite = new Sprite(resources["assets/"+key+".png"].texture);
-                sprite.scale.set(0.5,0.5);
-                sprite.position.set(_x, _y);
-                gameScene.addChild(sprite);
-                console.log(sprite.width, sprite.height, sprite.x, sprite.y);
-                _x += sprite.width;
-                if (i > 0 && i % 28 === 0)
-                {
-                    _y += sprite.height;
-                    _x = 0;
-                }
-            }
-            else
-            {
-                console.log("key not found "+ key);
-            }
-        }
-*/
-        //Render the stage
-        //renderer.render(stage);
+    GAME.Controls.start();
+    update();
 }
 
 function update() {

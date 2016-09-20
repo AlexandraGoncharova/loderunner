@@ -3,21 +3,37 @@
  */
 GAME.PlayerManager = function(engine)
 {
-    DisplayObject.call( this );
+    Container.call( this );
     this.engine = engine;
     this.player = null;
 };
-GAME.PlayerManager.prototype = Object.create(DisplayObject.prototype);
+GAME.PlayerManager.prototype = Object.create(Container.prototype);
 GAME.PlayerManager.constructor = GAME.PlayerManager;
 GAME.PlayerManager.prototype.initialize = function()
 {
     var levelData = this.engine.gameLevelData;
-    if (!levelData.hasOwnProperty(LEVEL_TILES.runner))
+    if (!levelData.hasOwnProperty("runner"))
     {
         console.log("Error! No Player Data.WRONG LEVEL");
         return;
     }
-    var cell = levelData[LEVEL_TILES.runner][0];
+    var cell = levelData["runner"][0];
     this.player = new Player(cell.x, cell.y);
-    
+    this.addChild(this.player.view);
+};
+GAME.PlayerManager.prototype.updateTransform = function()
+{
+    if(GAME.Controls.pressed(GAME.Controls.UP)) {
+        //jump || move up by ladder
+    } else if(GAME.Controls.pressed(GAME.Controls.DOWN)) {
+        // move down ladder or fall
+    } else if(GAME.Controls.pressed(GAME.Controls.LEFT)) {
+        this.player.update();
+    } else if(GAME.Controls.pressed(GAME.Controls.RIGHT)) {
+        this.player.update();
+    } else {
+        //
+    }
+
+    Container.prototype.updateTransform.call(this);
 };

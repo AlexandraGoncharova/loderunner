@@ -40,6 +40,6 @@ const GAME_MODES = Object.freeze({
 
 });
 
-const GAME_SCALE = 1;
+const GAME_SCALE = 0.75;
 const ENTITY_WIDTH = 40;
 const ENTITY_HEIGHT = 42;

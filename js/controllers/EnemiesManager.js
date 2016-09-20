@@ -12,12 +12,12 @@ GAME.EnemiesManager.prototype.initialize = function()
 {
     var levelData = this.engine.gameLevelData;
     var keys = Object.getOwnPropertyNames(levelData);
-    if (keys.indexOf(LEVEL_TILES.guard) == -1)
+    if (keys.indexOf("guard") == -1)
     {
         console.log("Error! No Enemies Data.WRONG LEVEL");
         return;
     }
-    var cells = levelData[LEVEL_TILES.guard];
+    var cells = levelData["guard"];
     var len = cells.length,
         sprite,
         i;

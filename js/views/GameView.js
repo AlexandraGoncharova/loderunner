@@ -11,5 +11,9 @@ GAME.GameView = function()
 };
 GAME.GameView.prototype.initialize = function ()
 {
-    
+
+};
+GAME.GameView.prototype.update = function ()
+{
+    this.renderer.render(this.stage);
 };

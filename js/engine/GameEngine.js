@@ -9,6 +9,7 @@ GAME.LodeRunner = function ()
     this.panelManager = new GAME.PanelManager(this);
     this.audioManager = new GAME.AudioManager(this);
     this.enemiesManager = new GAME.EnemiesManager(this);
+    this.background = new GAME.LevelBackground(this);
     this.score = 0;
     this.level = 1;
     this.gameOver = false;
@@ -19,6 +20,7 @@ GAME.LodeRunner.prototype = Object.create(null);
 GAME.LodeRunner.constructor = GAME.LodeRunner;
 GAME.LodeRunner.prototype.update = function()
 {
+    this.view.update();
 };
 GAME.LodeRunner.prototype.parseLevel = function(levelData)
 {
@@ -41,9 +43,9 @@ GAME.LodeRunner.prototype.parseLevel = function(levelData)
             }
             _data[key].push(new Point(_x,_y));
             _x++;
-            if (i > 0 && i % 28 === 0)
+            if (i > 0 && (i+1) % 28 === 0)
             {
-                _y +=1;
+                _y ++;
                 _x = 0;
             }
         }
@@ -62,5 +64,8 @@ GAME.LodeRunner.prototype.initialize = function()
     this.enemiesManager.initialize();
     this.playerManager.initialize();
     this.view.initialize();
+    this.background.createLevel();
+    this.view.gameScene.addChild(this.background);
     this.view.gameScene.addChild(this.playerManager);
+
 };
