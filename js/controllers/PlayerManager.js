@@ -3,11 +3,11 @@
  */
 GAME.PlayerManager = function(engine)
 {
-    Container.call( this );
+    DisplayObject.call( this );
     this.engine = engine;
     this.player = null;
 };
-GAME.PlayerManager.prototype = Object.create(Container.prototype);
+GAME.PlayerManager.prototype = Object.create(DisplayObject.prototype);
 GAME.PlayerManager.constructor = GAME.PlayerManager;
 GAME.PlayerManager.prototype.initialize = function()
 {
@@ -19,5 +19,5 @@ GAME.PlayerManager.prototype.initialize = function()
     }
     var cell = levelData[LEVEL_TILES.runner][0];
     this.player = new Player(cell.x, cell.y);
-
+    
 };

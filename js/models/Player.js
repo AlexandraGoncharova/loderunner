@@ -28,13 +28,12 @@ function Player(x,y)
     this.view.position.y = this.positionY;
     this.isDead = false;
     this.speed = 2;
-
     this.play();
 }
 Player.prototype = Object.create(null);
 Player.constructor = Player;
 Player.prototype.update = function()
 {
-    this.view.position.x = this.position.x;
-    this.view.position.y = this.position.y;
+    this.view.position.x = this.positionX;
+    this.view.position.y = this.positionY;
 };

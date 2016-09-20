@@ -15,7 +15,8 @@ var Container = PIXI.Container,
     Text = PIXI.Text,
     Graphics = PIXI.Graphics,
     Point = PIXI.Point,
-    MovieClip = PIXI.extras.MovieClip;
+    MovieClip = PIXI.extras.MovieClip,
+    DisplayObject = PIXI.DisplayObject;
 
 //Constants for level data, names in assets
 const LEVEL_TILES = {

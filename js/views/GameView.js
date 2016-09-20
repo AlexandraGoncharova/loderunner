@@ -9,3 +9,7 @@ GAME.GameView = function()
     this.gameScene = new Container();
     this.stage.addChild(this.gameScene);
 };
+GAME.GameView.prototype.initialize = function ()
+{
+    
+};

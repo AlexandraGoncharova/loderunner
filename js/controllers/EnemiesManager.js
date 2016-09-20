@@ -11,7 +11,8 @@ GAME.EnemiesManager.constructor = GAME.EnemiesManager;
 GAME.EnemiesManager.prototype.initialize = function()
 {
     var levelData = this.engine.gameLevelData;
-    if (!levelData.hasOwnProperty(LEVEL_TILES.guard))
+    var keys = Object.getOwnPropertyNames(levelData);
+    if (keys.indexOf(LEVEL_TILES.guard) == -1)
     {
         console.log("Error! No Enemies Data.WRONG LEVEL");
         return;

@@ -26,7 +26,7 @@ GAME.LodeRunner.prototype.parseLevel = function(levelData)
         _x = 0,//cellX
         _y = 0,//cellY
         i = 0,
-        _dataLen = _data.length,
+        _dataLen = levelData.length,
         key;
 
     for (i = 0; i < _dataLen; i++)
@@ -57,8 +57,10 @@ GAME.LodeRunner.prototype.parseLevel = function(levelData)
 };
 GAME.LodeRunner.prototype.initialize = function()
 {
-    this.parseLevel();
+    var ld = levelData1[0].split('');
+    this.parseLevel(ld);
     this.enemiesManager.initialize();
     this.playerManager.initialize();
     this.view.initialize();
+    this.view.gameScene.addChild(this.playerManager);
 };
