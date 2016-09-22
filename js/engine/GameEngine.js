@@ -9,7 +9,7 @@ GAME.LodeRunner = function ()
     this.panelManager = new GAME.PanelManager(this);
     this.audioManager = new GAME.AudioManager(this);
     this.enemiesManager = new GAME.EnemiesManager(this);
-    this.background = new GAME.LevelBackground(this);
+    this.map = new GAME.LevelMap(this);
     this.score = 0;
     this.level = 1;
     this.gameOver = false;
@@ -64,8 +64,8 @@ GAME.LodeRunner.prototype.initialize = function()
     this.enemiesManager.initialize();
     this.playerManager.initialize();
     this.view.initialize();
-    this.background.createLevel();
-    this.view.gameScene.addChild(this.background);
+    this.map.createLevel();
+    this.view.gameScene.addChild(this.map);
     this.view.gameScene.addChild(this.playerManager);
 
 };

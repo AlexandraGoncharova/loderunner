@@ -28,10 +28,13 @@ function Player(x,y)
 
     this.positionX = x;
     this.positionY = y;
+    this.offsetX = 0;
+    this.offsetY = 0;
+    this.nextTextures = [];
     this.view = new MovieClip(this.runningFrames);
     this.view.scale.set(ENTITY_HEIGHT * GAME_SCALE / this.view.height);
     this.view.position.x = this.positionX * this.view.width;
-    this.view.position.y = (this.positionY + 0.75) * this.view.height;
+    this.view.position.y = this.positionY * this.view.height;
     this.view.anchor.set(0);
 
     this.isDead = false;
@@ -42,8 +45,14 @@ function Player(x,y)
 Player.prototype = Object.create(null);
 Player.constructor = Player;
 Player.prototype.update = function() {
-    this.positionX += this.speed;
-    this.view.position.x = this.positionX * this.view.width;
-    this.view.position.y = (this.positionY + 0.75) * this.view.height;
-
+   // this.positionX += this.speed;
+    if (this.nextTextures.length > 0)
+    {
+        this.view.textures = this.nextTextures;
+        this.nextTextures = [];
+    }
+    console.log(this.offsetX * GAME_SCALE,this.offsetY*GAME_SCALE);
+    this.view.position.x = this.positionX * this.view.width + this.offsetX*GAME_SCALE;
+    this.view.position.y = this.positionY * this.view.height + this.offsetY*GAME_SCALE;
+    console.log (this.view.position.x, this.view.position.y);
 };

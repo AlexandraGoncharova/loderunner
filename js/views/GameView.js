@@ -3,7 +3,7 @@
  */
 GAME.GameView = function()
 {
-    this.renderer = autoDetectRenderer(960, 800);
+    this.renderer = autoDetectRenderer(960, 600);
     this.stage = new Container();
 
     this.gameScene = new Container();
