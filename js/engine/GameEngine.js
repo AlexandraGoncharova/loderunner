@@ -54,7 +54,6 @@ GAME.LodeRunner.prototype.parseLevel = function(levelData)
             console.log("key not found "+ key);
         }
     }
-    console.log(_data);
     this.gameLevelData = _data;
 };
 GAME.LodeRunner.prototype.initialize = function()
@@ -66,6 +65,7 @@ GAME.LodeRunner.prototype.initialize = function()
     this.view.initialize();
     this.map.createLevel();
     this.view.gameScene.addChild(this.map);
+    this.view.gameScene.addChild(this.enemiesManager);
     this.view.gameScene.addChild(this.playerManager);
 
 };

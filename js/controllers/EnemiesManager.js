@@ -5,6 +5,7 @@ GAME.EnemiesManager = function (engine)
 {
     Container.call( this );
     this.engine = engine;
+    this.enemies = [];
 };
 GAME.EnemiesManager.prototype = Object.create(Container.prototype);
 GAME.EnemiesManager.constructor = GAME.EnemiesManager;
@@ -19,10 +20,19 @@ GAME.EnemiesManager.prototype.initialize = function()
     }
     var cells = levelData["guard"];
     var len = cells.length,
-        sprite,
+        enemy,
+        cell,
         i;
     for (i = len - 1; i >= 0; i--)
     {
-
+        cell = cells[i];
+        enemy = new Enemy(cell.x, cell.y);
+        this.enemies.push(enemy);
+        this.addChild(this.enemies[len - i - 1].view);
     }
+};
+GAME.EnemiesManager.prototype.updateTransform = function()
+{
+
+    Container.prototype.updateTransform.call(this);
 };
