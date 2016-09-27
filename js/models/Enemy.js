@@ -3,9 +3,8 @@
  */
 function Enemy(x,y)
 {
-    Entity.call(this);
     var textures = resources["assets/guard1.png"].texture;
-    //console.log(textures);
+    console.log(textures);
     this.positionX = x;
     this.positionY = y;
     this.offsetX = 0;
@@ -21,3 +20,19 @@ function Enemy(x,y)
 }
 Enemy.prototype = Object.create(Entity.prototype);
 Enemy.constructor = Enemy;
+Enemy.prototype.getJsonData = function()
+{
+    var data = {},
+        keys = Object.keys(this),
+        self = this;
+
+    keys.forEach(function (key, index, arr) {
+        if (typeof(self[key]) != "object" && typeof(self[key]) != "function")
+        {
+            console.log(key);
+            data[key] = self[key];
+        }
+    });
+
+    return JSON.stringify(data);
+};

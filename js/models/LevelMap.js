@@ -82,6 +82,39 @@ GAME.LevelMap.prototype.getTileAt = function(x,y)
             });
     return tile.length>0?tile[0]:null;
 };
-GAME.LevelMap.prototype.toJson = function () {
-    return {};
+GAME.LevelMap.prototype.toJson = function()
+{
+    var data = {},
+        len = this.tiles.length,
+        i, tile;
+    for (i = len - 1; i >= 0; i--)
+    {
+        tile = this.tiles[i];
+        data[i] = tile.getJsonData();
+    }
+    return JSON.stringify(data);
+};
+GAME.LevelMap.prototype.restore = function (data)
+{
+    var _data = JSON.parse(data);
+    var keys = Object.keys(_data),
+        len = keys.length,
+        key,
+        tile,
+        obj,
+        i,
+        sprite;
+    this.tiles = [];
+    for (i = 0; i < len; i++ )
+    {
+        key = keys[i];
+        obj = JSON.parse(_data[key]);
+
+        if (obj.base == MAP_KEYS.GUARD || obj.base == MAP_KEYS.RUNNER)
+            sprite = new Sprite(resources["assets/"+MAP_KEYS.EMPTY+".png"].texture);
+        else
+            sprite = new Sprite(resources["assets/"+obj.base+".png"].texture);
+        tile = new TileMap(new Point(obj.cellX, obj.cellY), obj.base, obj.active, sprite, true );
+        this.tiles.push(tile);
+    }
 };

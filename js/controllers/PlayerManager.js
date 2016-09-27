@@ -30,6 +30,15 @@ GAME.PlayerManager.prototype.initialize = function()
 GAME.PlayerManager.prototype.toJson = function () {
     return this.player.getJsonData();
 };
+GAME.PlayerManager.prototype.restore = function(data)
+{
+    var _data = JSON.parse(data);
+    this.player = new Player(_data.positionX, _data.positionY);
+    this.player.offsetX = _data.offsetX;
+    this.player.offsetY = _data.offsetY;
+    this.player.isDead = _data.isDead;
+    this.addChild(this.player.view);
+};
 GAME.PlayerManager.prototype.updateTransform = function()
 {
     //todo

@@ -52,8 +52,8 @@ Player.prototype.update = function() {
         this.view.textures = this.nextTextures;
         this.nextTextures = [];
     }
-    console.log(this.offsetX * GAME_SCALE,this.offsetY*GAME_SCALE);
+    //console.log(this.offsetX * GAME_SCALE,this.offsetY*GAME_SCALE);
     this.view.position.x = this.positionX * this.view.width + this.offsetX*GAME_SCALE;
     this.view.position.y = this.positionY * this.view.height + this.offsetY*GAME_SCALE;
-    console.log (this.view.position.x, this.view.position.y);
+    //console.log (this.view.position.x, this.view.position.y);
 };

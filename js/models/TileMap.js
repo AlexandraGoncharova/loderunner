@@ -10,7 +10,7 @@ function TileMap(point, base, active, sprite, changed)
     this.sprite = sprite;
     this.isChanged = changed;
 }
-TileMap.prototype = Object.create(null);
+TileMap.prototype = Object.create(Entity.prototype);
 TileMap.constructor = TileMap;
 
 

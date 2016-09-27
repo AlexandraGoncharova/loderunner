@@ -1,7 +1,7 @@
 /**
  * Created by alexa on 13.09.2016.
  */
-var GameStorage = new StorageService('LR_DATA', 'Local');
+var GameStorage = new StorageService('LR_DATA', 'localStorage');
 GameStorage.init();
 document.addEventListener("DOMContentLoaded", function(event) {
     onReady();
@@ -35,11 +35,11 @@ function onReady() {
 var game, gameMode;
 
 function init() {
-    console.log(GameStorage.get());
+    var storageData = GameStorage.get();
     game = new GAME.LodeRunner();
     gameMode = GAME_MODES.GAME_MODE;
     document.body.appendChild(game.view.renderer.view);
-    game.initialize();
+    game.initialize(storageData);
     GAME.Controls.start();
     update();
 }

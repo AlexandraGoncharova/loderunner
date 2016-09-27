@@ -14,8 +14,11 @@ Entity.prototype.getJsonData = function()
         self = this;
 
     keys.forEach(function (key, index, arr) {
-        data[key] = self[key];
+        if (typeof(self[key]) != "object" && typeof(self[key]) != "function")
+        {
+            data[key] = self[key];
+        }
     });
 
-    return data;
+    return JSON.stringify(data);
 };

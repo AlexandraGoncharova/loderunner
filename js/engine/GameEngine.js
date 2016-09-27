@@ -64,19 +64,34 @@ GAME.LodeRunner.prototype.parseLevel = function(levelData)
     }
     this.gameLevelData = _data;
 };
-GAME.LodeRunner.prototype.initialize = function()
+GAME.LodeRunner.prototype.createNewLevel = function()
+{
+    this.enemiesManager.initialize();
+    this.playerManager.initialize();
+    this.map.createLevel();
+};
+GAME.LodeRunner.prototype.restoreLevelData = function(data)
+{
+    //todo hasOwnProperty
+    this.map.restore(data[this.map.className]);
+    this.playerManager.restore(data[this.playerManager.className]);
+    this.enemiesManager.restore(data[this.enemiesManager.className]);
+};
+GAME.LodeRunner.prototype.initialize = function(storageData)
 {
     var ld = levelData1[0].split('');
     this.parseLevel(ld);
-    this.enemiesManager.initialize();
-    this.playerManager.initialize();
+
+    if (storageData != undefined && storageData != {})
+        this.restoreLevelData(storageData);
+    else
+        this.createNewLevel();
+
     this.view.initialize();
-    this.map.createLevel();
     this.view.gameScene.addChild(this.map);
     this.view.gameScene.addChild(this.enemiesManager);
     this.view.gameScene.addChild(this.playerManager);
-    
-    console.log(this.toJSON());
+
 };
 
 GAME.LodeRunner.prototype.toJSON = function()
@@ -86,7 +101,6 @@ GAME.LodeRunner.prototype.toJSON = function()
     data[this.playerManager.className] = this.playerManager.toJson() || {};
     data[this.map.className] = this.map.toJson() || {};
     data[this.className] = {'level':this.level, 'score': this.score};
-    console.log(data);
     return data;
 };
 

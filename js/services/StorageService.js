@@ -5,21 +5,21 @@ function StorageService(name, type)//name - name for local storage, type - type 
 {
     var self = this,
         _name = name || '_gameStorage',
-        _type = type || 'Local',
+        _type = type || 'localStorage',
         _data;
 
     function _save(){
         var value = game.toJSON();
         var stringified = JSON.stringify( value ),
-            storage = window[ _type + 'Storage' ];
+            storage = window[ _type ];
         console.log(_name, stringified);
         storage.setItem(_name, stringified);
 
     }
 
     function _restore(){
-        var  storage = window[ _type + 'Storage' ];
-        _data = JSON.stringify(storage.getItem( _name )) || {};
+        var  storage = window[ _type  ];
+        _data = JSON.parse(storage.getItem( _name ));
     }
 
     function _init(){

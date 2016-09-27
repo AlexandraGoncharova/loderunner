@@ -3,7 +3,7 @@
  */
 GAME.EnemiesManager = function (engine)
 {
-    var STORAGE_NAME = 'enemies';
+    var STORAGE_NAME = "enemies";
     Container.call( this );
     this.engine = engine;
     this.enemies = [];
@@ -26,6 +26,7 @@ GAME.EnemiesManager.prototype.initialize = function()
         return;
     }
     var cells = levelData["guard"];
+    console.log(cells);
     var len = cells.length,
         enemy,
         cell,
@@ -53,5 +54,26 @@ GAME.EnemiesManager.prototype.toJson = function()
         enemy = this.enemies[i];
         data[i] = enemy.getJsonData();
     }
-    return data;
+    return JSON.stringify(data);
+};
+
+GAME.EnemiesManager.prototype.restore = function(data)
+{
+    var _data = JSON.parse(data);
+    var keys = Object.keys(_data),
+        len = keys.length,
+        key,
+        enemy,
+        obj,
+        i;
+    this.enemies = [];
+    for (i = 0; i < len; i++ )
+    {
+        key = keys[i];
+        obj = JSON.parse(_data[key]);
+        console.log(obj);
+        enemy = new Enemy(obj.positionX, obj.positionY);
+        this.enemies.push(enemy);
+        this.addChild(this.enemies[i].view);
+    }
 };
