@@ -3,9 +3,15 @@
  */
 GAME.PlayerManager = function(engine)
 {
+    var STORAGE_NAME = 'player';
     Container.call( this );
     this.engine = engine;
     this.player = null;
+    function getStorageName()
+    {
+        return STORAGE_NAME;
+    }
+    this.className = getStorageName();
 };
 GAME.PlayerManager.prototype = Object.create(Container.prototype);
 GAME.PlayerManager.constructor = GAME.PlayerManager;
@@ -20,6 +26,9 @@ GAME.PlayerManager.prototype.initialize = function()
     var cell = levelData["runner"][0];
     this.player = new Player(cell.x, cell.y);
     this.addChild(this.player.view);
+};
+GAME.PlayerManager.prototype.toJson = function () {
+    return this.player.getJsonData();
 };
 GAME.PlayerManager.prototype.updateTransform = function()
 {

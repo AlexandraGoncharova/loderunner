@@ -3,6 +3,7 @@
  */
 function Player(x,y)
 {
+    Entity.call(this);
     var textures = PIXI.loader.resources["assets/characters.json"].textures;
     this.runningFrames = [
         textures["run_1.png"],
@@ -42,7 +43,7 @@ function Player(x,y)
     this.view.animationSpeed = 0.1;
     this.view.play();
 }
-Player.prototype = Object.create(null);
+Player.prototype = Object.create(Entity.prototype);
 Player.constructor = Player;
 Player.prototype.update = function() {
    // this.positionX += this.speed;

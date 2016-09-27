@@ -3,7 +3,6 @@
  */
 //Game
 var GAME = window.GAME || {};
-
 //Aliases
 var Container = PIXI.Container,
     autoDetectRenderer = PIXI.autoDetectRenderer,

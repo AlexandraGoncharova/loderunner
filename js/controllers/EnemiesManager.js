@@ -3,9 +3,16 @@
  */
 GAME.EnemiesManager = function (engine)
 {
+    var STORAGE_NAME = 'enemies';
     Container.call( this );
     this.engine = engine;
     this.enemies = [];
+    
+    function getStorageName()
+    {
+        return STORAGE_NAME;
+    }
+    this.className = getStorageName();
 };
 GAME.EnemiesManager.prototype = Object.create(Container.prototype);
 GAME.EnemiesManager.constructor = GAME.EnemiesManager;
@@ -33,6 +40,18 @@ GAME.EnemiesManager.prototype.initialize = function()
 };
 GAME.EnemiesManager.prototype.updateTransform = function()
 {
-
     Container.prototype.updateTransform.call(this);
+};
+
+GAME.EnemiesManager.prototype.toJson = function()
+{
+    var data = {},
+        len = this.enemies.length,
+        i, enemy;
+    for (i = len - 1; i >= 0; i--)
+    {
+        enemy = this.enemies[i];
+        data[i] = enemy.getJsonData();
+    }
+    return data;
 };

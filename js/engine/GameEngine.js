@@ -3,6 +3,8 @@
  */
 GAME.LodeRunner = function ()
 {
+    var STORAGE_NAME = 'engine';
+    
     this.view = new GAME.GameView(this);
     this.playerManager = new GAME.PlayerManager(this);
     this.collisionManager = new GAME.CollisionManager(this);
@@ -15,6 +17,12 @@ GAME.LodeRunner = function ()
     this.gameOver = false;
     this.gamePause = false;
     this.gameLevelData = null;
+
+    function getStorageName()
+    {
+        return STORAGE_NAME;
+    }
+    this.className = getStorageName();
 };
 GAME.LodeRunner.prototype = Object.create(null);
 GAME.LodeRunner.constructor = GAME.LodeRunner;
@@ -67,5 +75,18 @@ GAME.LodeRunner.prototype.initialize = function()
     this.view.gameScene.addChild(this.map);
     this.view.gameScene.addChild(this.enemiesManager);
     this.view.gameScene.addChild(this.playerManager);
-
+    
+    console.log(this.toJSON());
 };
+
+GAME.LodeRunner.prototype.toJSON = function()
+{
+    var data = {};
+    data[this.enemiesManager.className] = this.enemiesManager.toJson() || {};
+    data[this.playerManager.className] = this.playerManager.toJson() || {};
+    data[this.map.className] = this.map.toJson() || {};
+    data[this.className] = {'level':this.level, 'score': this.score};
+    console.log(data);
+    return data;
+};
+

@@ -1,21 +1,14 @@
 /**
  * Created by alexa on 13.09.2016.
  */
+var GameStorage = new StorageService('LR_DATA', 'Local');
+GameStorage.init();
 document.addEventListener("DOMContentLoaded", function(event) {
     onReady();
 });
 
 function onReady() {
-    /*
-
-
-     var stage = new Container(),
-     renderer = autoDetectRenderer(960, 800);
-     document.body.appendChild(renderer.view);
-
-     */
-
-    loader
+     loader
         .add([
             "assets/block.png",
             "assets/brick.png",
@@ -42,6 +35,7 @@ function onReady() {
 var game, gameMode;
 
 function init() {
+    console.log(GameStorage.get());
     game = new GAME.LodeRunner();
     gameMode = GAME_MODES.GAME_MODE;
     document.body.appendChild(game.view.renderer.view);

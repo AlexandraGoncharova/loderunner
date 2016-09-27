@@ -3,9 +3,16 @@
  */
 GAME.LevelMap = function(engine)
 {
+   var STORAGE_NAME = 'map';
    Container.call(this);
    this.engine = engine;
    this.tiles = [];
+
+    function getStorageName()
+    {
+        return STORAGE_NAME;
+    }
+    this.className = getStorageName();
 };
 
 GAME.LevelMap.prototype = Object.create(Container.prototype);
@@ -74,4 +81,7 @@ GAME.LevelMap.prototype.getTileAt = function(x,y)
         return (el.cellX === x && el.cellY === y)
             });
     return tile.length>0?tile[0]:null;
+};
+GAME.LevelMap.prototype.toJson = function () {
+    return {};
 };

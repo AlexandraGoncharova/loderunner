@@ -3,8 +3,9 @@
  */
 function Enemy(x,y)
 {
+    Entity.call(this);
     var textures = resources["assets/guard1.png"].texture;
-    console.log(textures);
+    //console.log(textures);
     this.positionX = x;
     this.positionY = y;
     this.offsetX = 0;
@@ -18,5 +19,5 @@ function Enemy(x,y)
    // this.view.animationSpeed = 0.1;
   //  this.view.play();
 }
-Enemy.prototype = Object.create(null);
+Enemy.prototype = Object.create(Entity.prototype);
 Enemy.constructor = Enemy;
