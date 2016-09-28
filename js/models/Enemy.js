@@ -9,7 +9,10 @@ function Enemy(x,y)
     this.positionY = y;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.nextTextures = [];
+    this.currentAction = ACTIONS.ACT_LEFT;
+    this.hasGold = 0;
+    this.inHole = false;
+    this.isChanged = true;
     this.view = new Sprite(textures);//new MovieClip(textures);
     this.view.scale.set(GAME_SCALE);
     this.view.position.x = this.positionX * ENTITY_WIDTH * GAME_SCALE;//this.view.width;
@@ -20,19 +23,24 @@ function Enemy(x,y)
 }
 Enemy.prototype = Object.create(Entity.prototype);
 Enemy.constructor = Enemy;
-Enemy.prototype.getJsonData = function()
+Enemy.prototype.updatePosition = function(x, y, offX, offY, action)
 {
-    var data = {},
-        keys = Object.keys(this),
-        self = this;
-
-    keys.forEach(function (key, index, arr) {
-        if (typeof(self[key]) != "object" && typeof(self[key]) != "function")
-        {
-            console.log(key);
-            data[key] = self[key];
-        }
-    });
-
-    return JSON.stringify(data);
+    if (x != this.positionX || y!= this.positionY || offX != this.offsetX || offY != this.offsetY || this.currentAction != action)
+    {
+        this.isChanged = true;
+        this.positionX = x;
+        this.positionY = y;
+        this.offsetX = offX;
+        this.offsetY = offY;
+        this.currentAction = action;
+        
+    }
+};
+Enemy.prototype.update = function()
+{
+    this.move();
+    //todo change animation and view position if changed
+};
+Enemy.prototype.move = function () {
+    
 };

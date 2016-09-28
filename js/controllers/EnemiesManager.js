@@ -26,7 +26,6 @@ GAME.EnemiesManager.prototype.initialize = function()
         return;
     }
     var cells = levelData["guard"];
-    console.log(cells);
     var len = cells.length,
         enemy,
         cell,
@@ -41,6 +40,10 @@ GAME.EnemiesManager.prototype.initialize = function()
 };
 GAME.EnemiesManager.prototype.updateTransform = function()
 {
+    for (var i = 0; i < this.enemies.length; i++)
+    {
+        this.enemies[i].update();
+    }
     Container.prototype.updateTransform.call(this);
 };
 

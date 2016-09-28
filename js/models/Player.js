@@ -3,7 +3,6 @@
  */
 function Player(x,y)
 {
-    Entity.call(this);
     var textures = PIXI.loader.resources["assets/characters.json"].textures;
     this.runningFrames = [
         textures["run_1.png"],
@@ -46,14 +45,11 @@ function Player(x,y)
 Player.prototype = Object.create(Entity.prototype);
 Player.constructor = Player;
 Player.prototype.update = function() {
-   // this.positionX += this.speed;
     if (this.nextTextures.length > 0)
     {
         this.view.textures = this.nextTextures;
         this.nextTextures = [];
     }
-    //console.log(this.offsetX * GAME_SCALE,this.offsetY*GAME_SCALE);
     this.view.position.x = this.positionX * this.view.width + this.offsetX*GAME_SCALE;
     this.view.position.y = this.positionY * this.view.height + this.offsetY*GAME_SCALE;
-    //console.log (this.view.position.x, this.view.position.y);
 };
