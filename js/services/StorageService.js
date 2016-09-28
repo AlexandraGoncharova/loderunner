@@ -1,18 +1,23 @@
 /**
  * Created by a.goncharova on 26.09.2016.
  */
-function StorageService(name, type)//name - name for local storage, type - type storage: local or session
+function StorageService(name, type, savedObject)//name - name for local storage, type - type storage: local or session
 {
     var self = this,
         _name = name || '_gameStorage',
         _type = type || 'localStorage',
+        _objToSave = savedObject || null,
         _data;
 
     function _save(){
-        var value = game.toJSON();
+        if (!_objToSave)
+        {
+            console.error("No Object for get data");
+            return;
+        }
+        var value = _objToSave.toJSON();
         var stringified = JSON.stringify( value ),
             storage = window[ _type ];
-        console.log(_name, stringified);
         storage.setItem(_name, stringified);
 
     }
