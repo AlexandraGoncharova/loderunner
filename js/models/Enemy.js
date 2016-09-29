@@ -9,7 +9,8 @@ function Enemy(x,y)
     this.positionY = y;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.currentAction = ACTIONS.ACT_LEFT;
+    this.currentAction = ENEMY_ACTIONS.PATROLLING;
+    this.direction = ACTIONS.ACT_LEFT;
     this.hasGold = 0;
     this.inHole = false;
     this.isChanged = true;

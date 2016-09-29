@@ -79,3 +79,9 @@ const ACTIONS = {
     ACT_CLIMB_OUT : 11,
     ACT_REBORN : 12
 };
+
+const ENEMY_ACTIONS = {
+    PATROLLING: 1,
+    SCALING:2,
+    DESCANDING:3
+};
