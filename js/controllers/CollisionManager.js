@@ -11,28 +11,30 @@ GAME.CollisionManager.prototype.checkCollision= function()
     var enemies =this.engine.enemiesManager.enemies,
         map =this.engine.map,
         player = this.engine.playerManager.player,
-        i = enemies.length - 1;
+        tile,
+        enemy;
 
-    /*while(i--) {
-        if(enemies[i].visible) {
-            var a = bM.length;
-            while(a--) { //test with bullet
-                if(bM[a].visible) {
-                    if(eM[i].hitArea.contain(bM[a].position)) {
-                        eM[i].touched(bM[a]);
-                        bM[a].canRealloc();
-                        this.dispatchEvent('ENEMY_TOUCHED');
-                        //console.log('ENEMY TOUCHED');
-                    }
-                }
-            }
-            if(this.ship.visible && eM[i].hitArea.intersectWith(this.ship.hitArea)) {
-                eM[i].canRealloc();
-                this.ship.hitEnnemy();
-                this.dispatchEvent('TOUCH_ENEMY');
-            }
-
-
+    for (var i = 0; i < enemies.length; i++)
+    {
+        enemy = enemies[i];
+        tile = map.getTileAt(enemy.positionX,enemy.positionY);
+        if(tile.active == MAP_KEYS.RUNNER)
+        {
+            console.log("DIED!!!!!!!!!!!!!!!!!!!!");
         }
-    }*/
+    }
+
+    tile = map.getTileAt(player.positionX,player.positionY);
+    if( tile.base == MAP_KEYS.GOLD &&
+        ((!player.offsetX && player.offsetY >= 0 && player.offsetY < ENTITY_HEIGHT / 4) ||
+            (!player.offsetY && player.offsetX >= 0 && player.offsetX < ENTITY_WIDTH / 4) ||
+            (player.positionY < 15 && map.getTileAt(player.positionX,player.positionY + 1).base == MAP_KEYS.LADDER && player.offsetY < ENTITY_HEIGHT / 4)
+        )
+    )
+    {
+        console.log("PLAYER PICKED UP GOLD");
+        this.engine.map.getTileAt(player.positionX,player.positionY).active = MAP_KEYS.EMPTY;
+        this.engine.map.getTileAt(player.positionX,player.positionY).isChanged = true;
+     }
+
 };

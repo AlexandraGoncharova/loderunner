@@ -182,7 +182,7 @@ GAME.PlayerManager.prototype.moveStep = function(action, stayCurrPos)
         if(stayCurrPos && yOffset < 0) yOffset = 0; //stay on current position
         else if(yOffset < -tileH / 2) { //move to y-1 position
             if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY; //in hole or hide laddr
-            tile.active = currentTileType; //runner move to [x][y-1], so set [x][y].act to previous state*/
+            this.engine.map.getTileAt(x,y).active = currentTileType; //runner move to [x][y-1], so set [x][y].act to previous state*/
             y--;
             yOffset = tileH + yOffset;
           }
@@ -211,8 +211,8 @@ GAME.PlayerManager.prototype.moveStep = function(action, stayCurrPos)
         }
         if(stayCurrPos && yOffset > 0) yOffset = 0; //stay on current position
         else if(yOffset > tileH / 2) { //move to y+1 position
-            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY; //in hole or hide laddr
-            tile.active = currentTileType; //runner move to [x][y+1], so set [x][y].act to previous state
+            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY;
+            this.engine.map.getTileAt(x,y).active = currentTileType;
             y++;
             yOffset = yOffset - tileH;
         }
@@ -226,10 +226,10 @@ GAME.PlayerManager.prototype.moveStep = function(action, stayCurrPos)
     if ( action == ACTIONS.ACT_LEFT) {
         xOffset -= xMoveBase;
 
-        if(stayCurrPos && xOffset < 0) xOffset = 0; //stay on current position
-        else if ( xOffset < -ENTITY_WIDTH / 2) { //move to x-1 position
-            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY; //in hole or hide laddr
-            tile.active = currentTileType; //runner move to [x-1][y], so set [x][y].act to previous state
+        if(stayCurrPos && xOffset < 0) xOffset = 0;
+        else if ( xOffset < -ENTITY_WIDTH / 2) {
+            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY;
+            this.engine.map.getTileAt(x,y).active = currentTileType;
             x--;
             xOffset = tileW + xOffset;
         }
@@ -245,10 +245,10 @@ GAME.PlayerManager.prototype.moveStep = function(action, stayCurrPos)
     if ( action == ACTIONS.ACT_RIGHT ) {
         xOffset += xMoveBase;
 
-        if(stayCurrPos && xOffset > 0) xOffset = 0; //stay on current position
-        else if ( xOffset > ENTITY_WIDTH / 2) { //move to x+1 position
-            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY; //in hole or hide laddr
-            tile.active = currentTileType; //runner move to [x+1][y], so set [x][y].act to previous state
+        if(stayCurrPos && xOffset > 0) xOffset = 0;
+        else if ( xOffset > ENTITY_WIDTH / 2) {
+            if ( currentTileType == MAP_KEYS.BRICK || currentTileType == MAP_KEYS.HLADDER ) currentTileType = MAP_KEYS.EMPTY;
+            this.engine.map.getTileAt(x,y).active = currentTileType;
             x++;
             xOffset = xOffset - tileW;
           }
@@ -266,7 +266,7 @@ GAME.PlayerManager.prototype.moveStep = function(action, stayCurrPos)
     this.player.positionX = x;
     this.player.offsetX = xOffset;
     this.player.offsetY = yOffset;
+    this.engine.map.getTileAt(x,y).active = MAP_KEYS.RUNNER;
     this.player.update();
-    map.tiles[tileIndex] = tile;
 
 };

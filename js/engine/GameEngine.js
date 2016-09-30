@@ -28,6 +28,7 @@ GAME.LodeRunner.prototype = Object.create(null);
 GAME.LodeRunner.constructor = GAME.LodeRunner;
 GAME.LodeRunner.prototype.update = function()
 {
+    this.collisionManager.checkCollision();
     this.view.update();
 };
 GAME.LodeRunner.prototype.parseLevel = function(levelData)

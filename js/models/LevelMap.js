@@ -62,8 +62,9 @@ GAME.LevelMap.prototype.updateTransform = function()
                 sprite = el.sprite;//new Sprite(resources["assets/"+el.active+".png"].texture);???
                 sprite.scale.set(GAME_SCALE);
                 sprite.position.set(el.cellX * sprite.width, el.cellY * sprite.height);
-                if (el.active == MAP_KEYS.HLADDER)
+                if (el.active == MAP_KEYS.HLADDER || (el.active == MAP_KEYS.EMPTY && el.base != MAP_KEYS.EMPTY))
                     sprite.alpha = 0;
+
                 el.isChanged = false;
                 el.sprite = sprite;
                 self.addChild(sprite);

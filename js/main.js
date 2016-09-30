@@ -22,7 +22,8 @@ function onReady() {
             "assets/gold.png",
             "assets/guard1.png",
             "assets/runner1.png",
-            "assets/characters.json"
+            "assets/characters.json",
+            "assets/enemy.json"
         ])
         .on("progress", loadProgressHandler)
         .load(init);
@@ -35,8 +36,9 @@ function onReady() {
 }
 
 function init() {
+    console.log(resources);
     var storageData = GameStorage.get();
-
+    storageData = null;
     gameMode = GAME_MODES.GAME_MODE;
     document.body.appendChild(game.view.renderer.view);
     game.initialize(storageData);
